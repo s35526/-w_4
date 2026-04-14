@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Polisa {
 
     private String numerPolisy;
@@ -68,9 +70,10 @@ public class Polisa {
             skladka = skladkaBazowa;
         }
 
-        return Math.round(skladka *100.0)/100.0;
+        return Math.round(skladka * 100.0) / 100.0;
     }
-        public double obliczSkladkeOdnowienia() {
+
+    public double obliczSkladkeOdnowienia() {
         double bazowa = obliczSkladkeKoncowa();
         double odnowieniowa = bazowa;
 
@@ -95,25 +98,41 @@ public class Polisa {
         if (odnowieniowa < min) odnowieniowa = min;
         if (odnowieniowa > max) odnowieniowa = max;
 
-        return Math.round(odnowieniowa * 100.0) /100.0;
-     }
+        return Math.round(odnowieniowa * 100.0) / 100.0;
+    }
 
-     public String pobierzPodsumowanieRyzyka() {
+    public String pobierzPodsumowanieRyzyka() {
         String opis;
-        if      (poziomRyzyka <= 1) opis = "bardzo niskie";
+        if (poziomRyzyka <= 1) opis = "bardzo niskie";
         else if (poziomRyzyka == 2) opis = "niskie";
         else if (poziomRyzyka == 3) opis = "srednie";
         else if (poziomRyzyka == 4) opis = "wysokie";
-        else                        opis = "bardzo wysokie";
+        else opis = "bardzo wysokie";
 
         return "Polisa " + numerPolisy + " [" + klient + "] - poziom ryzyka: " + poziomRyzyka + " (" + opis + ")";
     }
 
     @Override
-    public boolean equals (object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Polisa polisa = (Polisa) o;
-        return objects.equals(numerPolisy, polisa.numerPolisy);
+        return Objects.equals(numerPolisy, polisa.numerPolisy);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numerPolisy);
+    }
+
+    @Override
+    public String toString() {
+        return "Polisa{" + "numerPolisy=" + numerPolisy + "'" +
+                "skladkaBazowa=" + skladkaBazowa + "'" +
+                "poziomRyzyka=" + poziomRyzyka + "'" +
+                "wartoscPojazdu=" + wartoscPojazdu + "'" +
+                "alarm=" + (czyMaAlarm ? "TAK" : "NIE") +
+                "bezszkodowy=" + (czyBezszkodowyKlient ? "TAK" : "NIE") +
+                "skladkaKoncowa=" + obliczSkladkeKoncowa() + "}";
     }
 }
