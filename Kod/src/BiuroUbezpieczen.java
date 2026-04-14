@@ -30,15 +30,23 @@ public class BiuroUbezpieczen {
         return Math.round(suma * 100.0) / 100.0;
     }
 
+    public double policzLacznaPrognozeOdnowien() {
+        double suma = 0;
+        for (Polisa  p : polisy) {
+            suma += p.obliczSkladkeOdnowienia();
+        }
+        return Math.round(suma * 100.0) / 100.0;
+    }
+
     public int policzPolisyWysokiegoRyzyka() {
         int licznik = 0;
         for (Polisa p : polisy) {
             if (p.getPoziomRyzyka() >= 4) {
                 licznik++;
             }
+        }
             return licznik;
         }
-    }
 
     public Polisa znajdzPoNumerze(String numerPolisy) {
         for (Polisa p : polisy) {
@@ -48,7 +56,7 @@ public class BiuroUbezpieczen {
     }
 
     public void wypiszTanszeNiz(double prog) {
-        System.out.println("Polisy ponizej" + prog + "zl:");
+        System.out.println("Polisy ponizej " + prog + "zl:");
         for (Polisa p : polisy) {
             if (p.obliczSkladkeKoncowa() < prog) {
                 System.out.println(" " + p);

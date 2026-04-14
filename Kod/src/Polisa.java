@@ -52,6 +52,9 @@ public class Polisa {
         return czyBezszkodowyKlient;
     }
 
+    public static int pobierzLiczbeUtworzonychPolis() {
+        return liczbaUtworzonychPolis;
+    }
 
     public double obliczSkladkeKoncowa() {
         double skladka = skladkaBazowa + OPLATA_ADMINISTRACYJNA;
